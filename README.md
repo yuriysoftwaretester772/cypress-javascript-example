@@ -23,24 +23,27 @@ This project is a testing framework built with **Cypress** to automate end-to-en
    ```bash
    git clone https://github.com/your-username/your-repo-name.git
 2. Navigate to the project directory:
-cd your-repo-name
+    ```bash
+    cd your-repo-name
 3. Install dependencies:
-npm install
+    ```bash
+    npm install
 
 ## Running Tests
 Open Cypress Test Runner
 To open the Cypress Test Runner and run tests interactively:
-npx cypress open
+    ```bash
+    npx cypress open
 
 Run Tests in Headless Mode
 To run all tests in headless mode:
-
-npx cypress run
+    ```bash
+    npx cypress run
 
 Run Specific Test File
 To run a specific test file:
-
-npx cypress run --spec amazon_smoke_tests.cy.js
+    ```bash
+    npx cypress run --spec amazon_smoke_tests.cy.js
 
 ## Writing Tests
 Test files are located in the cypress/e2e/tests/ directory.
