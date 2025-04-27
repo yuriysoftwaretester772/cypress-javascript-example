@@ -1,17 +1,20 @@
 # Cypress Testing Framework
 
-This project is a testing framework built with **Cypress** to automate end-to-end tests for the Amazon website. It includes tests for verifying navigation, search functionality, and other basic features of the Amazon homepage. The framework follows the **Page Object Model (POM)** design pattern to improve maintainability and reusability.
+This project is a testing framework built with **Cypress** to automate end-to-end and API tests for the Amazon website and other APIs. It includes tests for verifying navigation, search functionality, API responses, and other features. The framework follows the **Page Object Model (POM)** design pattern to improve maintainability and reusability.
 
 ## Features
 - **Smoke Tests**: Verify the basic functionality of the Amazon homepage, such as navigation and title verification.
 - **Data-Driven Testing**: Perform search functionality tests with multiple search terms using fixtures.
+- **API Testing**: Validate API responses using the DummyJSON API for structured data like products and users.
 - **Reusable Commands**: Custom Cypress commands for common actions like visiting the homepage and verifying the title.
 - **Page Object Model (POM)**: Encapsulates page-specific actions and elements into reusable classes.
+- **ESLint Integration**: Ensures code quality and consistency with linting rules.
 
 ## Technologies Used
 - **Cypress**: A JavaScript-based end-to-end testing framework.
 - **Node.js**: For managing dependencies and running Cypress.
 - **JavaScript**: The programming language used for writing tests.
+- **ESLint**: For linting and enforcing code quality.
 - **Git**: For version control.
 
 ## Page Object Model (POM)
@@ -33,14 +36,29 @@ This framework implements the **Page Object Model (POM)** design pattern to sepa
 - **Reusability**: Page objects can be reused across multiple tests.
 - **Readability**: Tests are cleaner and focus on high-level actions rather than implementation details.
 
+## API Testing
+This project includes API tests using the DummyJSON API, which provides structured data for testing purposes. API tests are located in the `cypress/e2e/api/` directory.
+
+### Example API Tests
+1. **Products API**:
+   - File: `cypress/e2e/api/products_api.cy.js`
+   - Tests endpoints for fetching products, fetching a single product by ID, and handling 404 errors for non-existent products.
+
+2. **Users API**:
+   - File: `cypress/e2e/api/users_api.cy.js`
+   - Tests endpoints for fetching users, fetching a single user by ID, and handling 404 errors for non-existent users.
+
 ## Project Structure
 ```
 cypress/
 ├── e2e/
-│   ├── tests/               # Test cases
+│   ├── tests/               # End-to-end test cases
 │   │   ├── amazon_smoke_tests.cy.js
 │   │   ├── amazon_search_multiple.cy.js
 │   │   └── amazon_verify_title.cy.js
+│   ├── api/                 # API test cases
+│   │   ├── products_api.cy.js
+│   │   └── users_api.cy.js
 │   └── pages/               # Page objects
 │       ├── amazon_homepage.js
 │       └── amazon_search_results.js
@@ -73,8 +91,9 @@ cypress/
 ### Open Cypress Test Runner
 To open the Cypress Test Runner and run tests interactively:
 ```bash
-npx cypress open
+npm run test:open
 ```
+This script will first run ESLint to check for linting errors and then open the Cypress Test Runner.
 
 ### Run Tests in Headless Mode
 To run all tests in headless mode:
@@ -88,11 +107,20 @@ To run a specific test file:
 npx cypress run --spec cypress/e2e/tests/amazon_smoke_tests.cy.js
 ```
 
-## Writing Tests
-- Test files are located in the `cypress/e2e/tests/` directory.
-- Use the `cypress/fixtures/` directory to store test data (e.g., `search_terms.json`).
-- Reuse common actions by adding custom commands in `cypress/support/commands.js`.
-- Use page objects from the `cypress/pages/` directory to interact with specific pages.
+## Linting
+This project uses **ESLint** to enforce code quality and consistency. The linting rules are defined in the `eslint.config.js` file.
+
+### Run Linter
+To run the linter and check for issues:
+```bash
+npm run lint
+```
+
+### Fix Linting Issues
+To automatically fix linting issues:
+```bash
+npx eslint 'cypress/**/*.js' --fix
+```
 
 ## Custom Commands
 This project includes custom Cypress commands for common actions:
