@@ -1,3 +1,9 @@
+import AmazonHomepage from '../pages/amazon_homepage';
+import AmazonSearchResults from '../pages/amazon_search_results';
+
+const homepage = new AmazonHomepage();
+const searchResults = new AmazonSearchResults();
+
 /**
  * Data-driven tests for verifying the search functionality on Amazon's homepage.
  */
@@ -6,8 +12,8 @@ describe('Amazon Search Functionality', () => {
     const EXPECTED_TITLE = 'Amazon.com. Spend less. Smile more.';
 
     beforeEach(() => {
-        // Navigate to the Amazon homepage before each test
-        cy.visitAmazonHomepage(BASE_URL, EXPECTED_TITLE);
+        // Use the page object to navigate to the Amazon homepage
+        homepage.visitHomepage(BASE_URL, EXPECTED_TITLE);
     });
 
     it('Search for multiple items from fixture', () => {
@@ -16,15 +22,14 @@ describe('Amazon Search Functionality', () => {
             searchItems.forEach((item) => {
                 cy.log(`Testing search functionality for: "${item}"`);
 
-                // Locate the search field element, clear it, and enter the search term
-                cy.get('#twotabsearchtextbox').clear().type(`${item}{enter}`);
+                // Use the page object to perform the search
+                homepage.searchForItem(item);
 
-                // Verify the page title matches the search term
+                // Use the page object to verify search results
                 const expectedSearchTitle = `Amazon.com : ${item}`;
-                cy.title().should('eq', expectedSearchTitle);
+                searchResults.verifySearchResults();
+                searchResults.verifySearchTitle(expectedSearchTitle);
 
-                // Verify that search results are displayed
-                cy.get('.s-main-slot').should('exist');
                 cy.log(`Search for "${item}" completed successfully.`);
             });
         });
