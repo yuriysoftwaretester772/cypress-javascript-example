@@ -85,6 +85,7 @@ context('Utilities', () => {
     function waitOneSecond () {
       // return a promise that resolves after 1 second
       return new Cypress.Promise((resolve, reject) => {
+        // eslint-disable-next-line no-unused-vars
         setTimeout(() => {
           // set waited to true
           waited = true

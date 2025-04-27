@@ -1,6 +1,6 @@
-const { defineConfig } = require("cypress");
+import { defineConfig } from "cypress";
 
-module.exports = defineConfig({
+export default defineConfig({
   projectId: 'w9o9is',
   viewportWidth: 1280, // Set the width of the viewport
   viewportHeight: 720, // Set the height of the viewport
@@ -11,6 +11,7 @@ module.exports = defineConfig({
     retries: {
       runMode: 2,    // When running `cypress run`, retry tests 2 additional times
       openMode: 1    // When running `cypress open`, retry tests 1 additional time
-    }
+    },
+    specPattern: "cypress/e2e/**/*.cy.js",
   },
 });
